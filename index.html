@@ -6,459 +6,124 @@
   <title>Fiji Methodist Hymn Book</title>
   <meta name="description" content="Na Sere ni Lotu Wesele e Viti - Offline Fijian Hymn Book and Services" />
   <meta name="theme-color" content="#0056b3" />
-
-  <!-- iOS Web App / Home Screen Support -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Fiji Hymns" />
   <link rel="apple-touch-icon" href="icon.png" />
   <link rel="icon" type="image/png" href="icon.png" />
   <link rel="manifest" href="manifest.json" />
-
   <style>
     :root {
-      --bg: #f6f8fb;
-      --surface: #ffffff;
-      --surface-alt: #eef2f7;
-      --text: #18202c;
-      --text-muted: #5c687a;
-      --primary: #0056b3;
-      --primary-soft: #e6f0ff;
-      --border: #dce3ec;
-      --heart: #e11d48;
-      --shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
-      --font-size: 18px;
+      --bg: #f6f8fb; --surface: #ffffff; --surface-alt: #eef2f7;
+      --text: #18202c; --text-muted: #5c687a; --primary: #0056b3;
+      --primary-soft: #e6f0ff; --border: #dce3ec; --heart: #e11d48;
+      --shadow: 0 2px 8px rgba(15, 23, 42, 0.06); --font-size: 18px;
     }
-
     body.dark {
-      --bg: #0f141c;
-      --surface: #18202c;
-      --surface-alt: #232e3f;
-      --text: #f1f5f9;
-      --text-muted: #94a3b8;
-      --primary: #60a5fa;
-      --primary-soft: #1e3a5f;
-      --border: #2a3648;
-      --heart: #fb7185;
+      --bg: #0f141c; --surface: #18202c; --surface-alt: #232e3f;
+      --text: #f1f5f9; --text-muted: #94a3b8; --primary: #60a5fa;
+      --primary-soft: #1e3a5f; --border: #2a3648; --heart: #fb7185;
       --shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
     }
-
-    * {
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
-
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      margin: 0; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+      background: var(--bg); color: var(--text);
       padding-top: env(safe-area-inset-top);
       padding-bottom: calc(68px + env(safe-area-inset-bottom));
-      transition: background 0.2s, color 0.2s;
     }
-
-    /* Top App Bar */
     .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
+      position: sticky; top: 0; z-index: 30; background: var(--surface);
+      border-bottom: 1px solid var(--border); padding: 12px 16px;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
     }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-    }
-
-    .brand img {
-      width: 34px;
-      height: 34px;
-      border-radius: 8px;
-      flex-shrink: 0;
-    }
-
-    .brand-title {
-      font-size: 17px;
-      font-weight: 700;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .brand-sub {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
+    .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .brand img { width: 34px; height: 34px; border-radius: 8px; flex-shrink: 0; }
+    .brand-title { font-size: 17px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .brand-sub { font-size: 11px; color: var(--text-muted); }
     .icon-btn {
-      background: var(--surface-alt);
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 8px 11px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      flex-shrink: 0;
+      background: var(--surface-alt); color: var(--text); border: 1px solid var(--border);
+      border-radius: 10px; padding: 8px 11px; font-size: 14px; font-weight: 600;
+      cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 5px; flex-shrink: 0;
     }
-
-    .icon-btn:active {
-      transform: scale(0.96);
-    }
-
-    .icon-btn:disabled {
-      opacity: 0.4;
-      pointer-events: none;
-    }
-
-    /* iOS Install Banner */
+    .icon-btn:disabled { opacity: 0.4; pointer-events: none; }
     .install-banner {
-      background: var(--primary-soft);
-      color: var(--text);
-      border-bottom: 1px solid var(--border);
-      padding: 10px 16px;
-      font-size: 13px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
+      background: var(--primary-soft); color: var(--text); border-bottom: 1px solid var(--border);
+      padding: 10px 16px; font-size: 13px; display: flex; align-items: center; justify-content: space-between; gap: 10px;
     }
-
-    .install-banner strong {
-      color: var(--primary);
-    }
-
-    .close-banner {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      font-size: 18px;
-      cursor: pointer;
-      padding: 0 4px;
-    }
-
-    /* Main Container */
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 14px 16px;
-    }
-
-    /* Search & Filter */
-    .search-box {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
-    .search-input-wrap {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-
+    .install-banner strong { color: var(--primary); }
+    .close-banner { background: none; border: none; color: var(--text-muted); font-size: 18px; cursor: pointer; }
+    .container { max-width: 720px; margin: 0 auto; padding: 14px 16px; }
+    .search-box { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+    .search-input-wrap { position: relative; display: flex; align-items: center; }
     .search-input {
-      width: 100%;
-      padding: 12px 38px 12px 14px;
-      font-size: 16px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      outline: none;
+      width: 100%; padding: 12px 38px 12px 14px; font-size: 16px; border-radius: 12px;
+      border: 1px solid var(--border); background: var(--surface); color: var(--text); outline: none;
     }
-
-    .search-input:focus {
-      border-color: var(--primary);
-    }
-
+    .search-input:focus { border-color: var(--primary); }
     .clear-search {
-      position: absolute;
-      right: 10px;
-      background: var(--surface-alt);
-      border: none;
-      color: var(--text-muted);
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      font-size: 14px;
-      cursor: pointer;
-      display: none;
+      position: absolute; right: 10px; background: var(--surface-alt); border: none; color: var(--text-muted);
+      width: 24px; height: 24px; border-radius: 50%; font-size: 14px; cursor: pointer; display: none;
     }
-
     .category-select {
-      width: 100%;
-      padding: 10px 12px;
-      font-size: 14px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      outline: none;
+      width: 100%; padding: 10px 12px; font-size: 14px; border-radius: 10px;
+      border: 1px solid var(--border); background: var(--surface); color: var(--text); outline: none;
     }
-
-    .count-bar {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-muted);
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    /* Cards List */
-    .list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
+    .count-bar { font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 10px; display: flex; justify-content: space-between; }
+    .list { display: flex; flex-direction: column; gap: 10px; }
     .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 13px 14px;
-      box-shadow: var(--shadow);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      cursor: pointer;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+      padding: 13px 14px; box-shadow: var(--shadow); display: flex; align-items: center; gap: 12px; cursor: pointer;
     }
-
-    .card:active {
-      transform: scale(0.99);
-    }
-
     .num-badge {
-      min-width: 44px;
-      height: 44px;
-      padding: 0 8px;
-      border-radius: 11px;
-      background: var(--primary-soft);
-      color: var(--primary);
-      font-weight: 700;
-      font-size: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      min-width: 44px; height: 44px; padding: 0 8px; border-radius: 11px;
+      background: var(--primary-soft); color: var(--primary); font-weight: 700; font-size: 15px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-
-    .card-body {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .card-title {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 3px;
-      color: var(--text);
-    }
-
-    .card-meta {
-      font-size: 12px;
-      color: var(--text-muted);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .fav-btn {
-      background: none;
-      border: none;
-      font-size: 20px;
-      cursor: pointer;
-      padding: 6px;
-      color: var(--text-muted);
-      flex-shrink: 0;
-    }
-
-    .fav-btn.active {
-      color: var(--heart);
-    }
-
-    /* Reader View */
-    .reader-view {
-      display: none;
-    }
-
-    .reader-header {
-      margin-bottom: 16px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--border);
-    }
-
+    .card-body { flex: 1; min-width: 0; }
+    .card-title { font-size: 16px; font-weight: 600; margin-bottom: 3px; color: var(--text); }
+    .card-meta { font-size: 12px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .fav-btn { background: none; border: none; font-size: 20px; cursor: pointer; padding: 6px; color: var(--text-muted); flex-shrink: 0; }
+    .fav-btn.active { color: var(--heart); }
+    .reader-view { display: none; }
+    .reader-header { margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
     .reader-badge {
-      display: inline-block;
-      background: var(--primary-soft);
-      color: var(--primary);
-      font-size: 12px;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 8px;
-      margin-bottom: 8px;
+      display: inline-block; background: var(--primary-soft); color: var(--primary);
+      font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 8px; margin-bottom: 8px;
     }
-
-    .reader-title {
-      font-size: 24px;
-      font-weight: 700;
-      margin: 0 0 6px 0;
-      line-height: 1.25;
-    }
-
-    .reader-cat {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--primary);
-      margin-bottom: 4px;
-    }
-
-    .reader-tune {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    .verse-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 13px;
-      margin-bottom: 22px;
-    }
-
+    .reader-title { font-size: 24px; font-weight: 700; margin: 0 0 6px 0; line-height: 1.25; }
+    .reader-cat { font-size: 13px; font-weight: 600; color: var(--primary); margin-bottom: 4px; }
+    .reader-tune { font-size: 13px; color: var(--text-muted); }
+    .verse-row { display: flex; align-items: flex-start; gap: 13px; margin-bottom: 22px; }
     .verse-num {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--surface-alt);
-      color: var(--primary);
-      font-size: 13px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 3px;
+      width: 28px; height: 28px; border-radius: 50%; background: var(--surface-alt); color: var(--primary);
+      font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 3px;
     }
-
-    .verse-text {
-      flex: 1;
-      font-size: var(--font-size);
-      line-height: 1.55;
-      white-space: pre-line;
-    }
-
-    .liturgy-body {
-      font-size: var(--font-size);
-      line-height: 1.65;
-    }
-
-    .liturgy-body p {
-      margin: 0 0 18px 0;
-    }
-
-    /* Reader Bottom Controls */
+    .verse-text { flex: 1; font-size: var(--font-size); line-height: 1.55; white-space: pre-line; }
+    .liturgy-body { font-size: var(--font-size); line-height: 1.65; }
+    .liturgy-body p { margin: 0 0 18px 0; }
     .reader-bar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 40;
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      padding: 8px 14px calc(8px + env(safe-area-inset-bottom));
-      display: none;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 40; background: var(--surface);
+      border-top: 1px solid var(--border); padding: 8px 14px calc(8px + env(safe-area-inset-bottom));
+      display: none; align-items: center; justify-content: space-between; gap: 8px;
     }
-
-    .font-controls {
-      display: flex;
-      align-items: center;
-      background: var(--surface-alt);
-      border-radius: 10px;
-      padding: 2px;
-    }
-
-    .font-controls button {
-      background: none;
-      border: none;
-      color: var(--text);
-      font-weight: 700;
-      font-size: 14px;
-      padding: 6px 10px;
-      cursor: pointer;
-    }
-
-    .font-controls span {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-muted);
-      min-width: 24px;
-      text-align: center;
-    }
-
-    /* Bottom Navigation Bar */
+    .font-controls { display: flex; align-items: center; background: var(--surface-alt); border-radius: 10px; padding: 2px; }
+    .font-controls button { background: none; border: none; color: var(--text); font-weight: 700; font-size: 14px; padding: 6px 10px; cursor: pointer; }
+    .font-controls span { font-size: 12px; font-weight: 600; color: var(--text-muted); min-width: 24px; text-align: center; }
     .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 35;
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      display: flex;
-      padding: 6px 0 calc(6px + env(safe-area-inset-bottom));
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 35; background: var(--surface);
+      border-top: 1px solid var(--border); display: flex; padding: 6px 0 calc(6px + env(safe-area-inset-bottom));
     }
-
     .nav-item {
-      flex: 1;
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      font-size: 12px;
-      font-weight: 600;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-      padding: 4px 0;
-      cursor: pointer;
+      flex: 1; background: none; border: none; color: var(--text-muted); font-size: 12px; font-weight: 600;
+      display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 4px 0; cursor: pointer;
     }
-
-    .nav-item span.nav-icon {
-      font-size: 19px;
-    }
-
-    .nav-item.active {
-      color: var(--primary);
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: 48px 20px;
-      color: var(--text-muted);
-    }
+    .nav-item span.nav-icon { font-size: 19px; }
+    .nav-item.active { color: var(--primary); }
+    .empty-state { text-align: center; padding: 48px 20px; color: var(--text-muted); }
   </style>
 </head>
 <body>
-
-  <!-- Top Bar -->
   <header class="topbar" id="mainTopbar">
     <div class="brand">
       <img src="icon.png" alt="Icon" onerror="this.style.display='none'" />
@@ -470,7 +135,6 @@
     <button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode">🌙</button>
   </header>
 
-  <!-- Reader Top Bar -->
   <header class="topbar" id="readerTopbar" style="display: none;">
     <button class="icon-btn" id="backBtn">← Back</button>
     <div class="brand-title" id="readerTopTitle">Hymn</div>
@@ -480,15 +144,12 @@
     </div>
   </header>
 
-  <!-- iPhone Safari Install Tip -->
   <div class="install-banner" id="iosBanner" style="display: none;">
     <div>📲 <strong>Install Offline:</strong> Tap <strong>Share (□↑)</strong> in Safari, then tap <strong>Add to Home Screen</strong>.</div>
     <button class="close-banner" id="closeBannerBtn">×</button>
   </div>
 
-  <!-- Main List Views -->
   <main class="container" id="listView">
-    <!-- Hymns Search & Filter -->
     <div id="hymnControls">
       <div class="search-box">
         <div class="search-input-wrap">
@@ -500,19 +161,15 @@
         </select>
       </div>
     </div>
-
     <div class="count-bar">
       <span id="sectionLabel">All Hymns</span>
       <span id="resultCount">Loading...</span>
     </div>
-
     <div class="list" id="itemsList"></div>
   </main>
 
-  <!-- Reader View (Hymn or Service) -->
   <main class="container reader-view" id="readerView"></main>
 
-  <!-- Reader Bottom Controls -->
   <div class="reader-bar" id="readerBar">
     <button class="icon-btn" id="prevHymnBtn">‹ Prev</button>
     <div class="font-controls">
@@ -523,53 +180,36 @@
     <button class="icon-btn" id="nextHymnBtn">Next ›</button>
   </div>
 
-  <!-- Bottom Tab Navigation -->
   <nav class="bottom-nav" id="bottomNav">
-    <button class="nav-item active" data-tab="hymns">
-      <span class="nav-icon">📖</span>
-      <span>Hymns</span>
-    </button>
-    <button class="nav-item" data-tab="favorites">
-      <span class="nav-icon">❤️</span>
-      <span>Favorites</span>
-    </button>
-    <button class="nav-item" data-tab="services">
-      <span class="nav-icon">⛪</span>
-      <span>Services</span>
-    </button>
+    <button class="nav-item active" data-tab="hymns"><span class="nav-icon">📖</span><span>Hymns</span></button>
+    <button class="nav-item" data-tab="favorites"><span class="nav-icon">❤️</span><span>Favorites</span></button>
+    <button class="nav-item" data-tab="services"><span class="nav-icon">⛪</span><span>Services</span></button>
   </nav>
 
   <script>
-    let allHymns = [];
-    let allServices = [];
-    let currentTab = 'hymns';
-    let currentHymnIndex = -1;
-    let filteredHymns = [];
+    let allHymns = [], allServices = [], filteredHymns = [];
+    let currentTab = 'hymns', currentHymnIndex = -1;
     let favorites = new Set(JSON.parse(localStorage.getItem('fiji_hymn_favs') || '[]'));
     let fontSize = parseInt(localStorage.getItem('fiji_hymn_font') || '18', 10);
     let isDark = localStorage.getItem('fiji_hymn_dark') === 'true';
 
-    // Apply saved theme & font size
     function applyTheme() {
       document.body.classList.toggle('dark', isDark);
       const icon = isDark ? '☀️' : '🌙';
       document.getElementById('themeBtn').textContent = icon;
       document.getElementById('readerThemeBtn').textContent = icon;
     }
-
     function applyFontSize() {
       document.documentElement.style.setProperty('--font-size', fontSize + 'px');
       document.getElementById('fontSizeLabel').textContent = fontSize;
       localStorage.setItem('fiji_hymn_font', fontSize);
     }
-
     applyTheme();
     applyFontSize();
 
     document.getElementById('themeBtn').onclick = () => { isDark = !isDark; localStorage.setItem('fiji_hymn_dark', isDark); applyTheme(); };
     document.getElementById('readerThemeBtn').onclick = () => { isDark = !isDark; localStorage.setItem('fiji_hymn_dark', isDark); applyTheme(); };
 
-    // Show iOS Safari install banner if not standalone
     const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent);
     const isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
     if (isIos && !isStandalone && !localStorage.getItem('hide_ios_banner')) {
@@ -580,29 +220,15 @@
       localStorage.setItem('hide_ios_banner', '1');
     };
 
-    // Escape HTML safely and format **bold** choruses
-    function formatVerseHtml(raw) {
-      const escaped = raw
-        .replace(/&/g, '&')
-        .replace(/</g, '<')
-        .replace(/>/g, '>');
-      return escaped.replace(/\*\*(.+?)\*\*/gs, '<strong>$1</strong>');
-    }
-
     function escapeText(raw) {
-      return String(raw || '')
-        .replace(/&/g, '&')
-        .replace(/</g, '<')
-        .replace(/>/g, '>');
+      return String(raw || '').replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>');
     }
-
+    function formatVerseHtml(raw) {
+      return escapeText(raw).replace(/\*\*(.+?)\*\*/gs, '<strong>$1</strong>');
+    }
     function toggleFavorite(id, e) {
       if (e) e.stopPropagation();
-      if (favorites.has(id)) {
-        favorites.delete(id);
-      } else {
-        favorites.add(id);
-      }
+      favorites.has(id) ? favorites.delete(id) : favorites.add(id);
       localStorage.setItem('fiji_hymn_favs', JSON.stringify([...favorites]));
       if (document.getElementById('readerView').style.display === 'block' && currentHymnIndex >= 0) {
         const h = filteredHymns[currentHymnIndex];
@@ -612,26 +238,21 @@
       }
     }
 
-    // Load JSON data
     async function initData() {
       try {
-        const [hRes, lRes] = await Promise.all([
-          fetch('./hymns.json'),
-          fetch('./liturgy.json')
-        ]);
+        const [hRes, lRes] = await Promise.all([fetch('./hymns.json'), fetch('./liturgy.json')]);
+        if (!hRes.ok || !lRes.ok) throw new Error('HTTP ' + hRes.status + '/' + lRes.status);
         allHymns = await hRes.json();
         allServices = await lRes.json();
-
-        // Populate categories
         const categories = [...new Set(allHymns.map(h => h.category).filter(Boolean))];
-        const select = document.getElementById('categorySelect');
-        select.innerHTML = `<option value="">All Categories (${allHymns.length} Hymns)</option>` +
+        document.getElementById('categorySelect').innerHTML =
+          `<option value="">All Categories (${allHymns.length} Hymns)</option>` +
           categories.map(c => `<option value="${escapeText(c)}">${escapeText(c)}</option>`).join('');
-
         renderList();
       } catch (err) {
+        document.getElementById('resultCount').textContent = 'Error';
         document.getElementById('itemsList').innerHTML =
-          '<div class="empty-state">Unable to load hymns. Please connect to the internet once to save offline data.</div>';
+          `<div class="empty-state">Unable to load hymns (${escapeText(err.message)}). Please refresh once with internet.</div>`;
       }
     }
 
@@ -667,39 +288,30 @@
         sectionLabel.textContent = 'Favorite Hymns';
         list = allHymns.filter(h => favorites.has(h.id));
       } else {
-        sectionLabel.textContent = selectedCat ? selectedCat : 'All Hymns';
-        if (selectedCat) {
-          list = list.filter(h => h.category === selectedCat);
-        }
+        sectionLabel.textContent = selectedCat || 'All Hymns';
+        if (selectedCat) list = list.filter(h => h.category === selectedCat);
         if (query) {
           list = list.filter(h =>
             (h.searchIndex && h.searchIndex.includes(query)) ||
             String(h.number) === query ||
             h.title.toLowerCase().includes(query)
           );
-          // Put exact hymn number match at the top
           list.sort((a, b) => {
             const aExact = String(a.number) === query || a.displayNumber.toLowerCase() === query;
             const bExact = String(b.number) === query || b.displayNumber.toLowerCase() === query;
-            if (aExact && !bExact) return -1;
-            if (!aExact && bExact) return 1;
-            return a.number - b.number;
+            return aExact === bExact ? a.number - b.number : (aExact ? -1 : 1);
           });
         }
       }
 
       filteredHymns = list;
       countEl.textContent = `${list.length} ${list.length === 1 ? 'Hymn' : 'Hymns'}`;
-
-      if (list.length === 0) {
+      if (!list.length) {
         listEl.innerHTML = `<div class="empty-state">${
-          currentTab === 'favorites'
-            ? 'No favorite hymns yet. Tap ♡ on any hymn to save it here.'
-            : 'No hymns matched your search.'
+          currentTab === 'favorites' ? 'No favorite hymns yet. Tap ♡ on any hymn to save it here.' : 'No hymns matched your search.'
         }</div>`;
         return;
       }
-
       listEl.innerHTML = list.map((h, idx) => `
         <div class="card" onclick="openHymn(${idx})">
           <div class="num-badge">${escapeText(h.displayNumber)}</div>
@@ -718,17 +330,14 @@
       currentHymnIndex = idx;
       const h = filteredHymns[idx];
       if (!h) return;
-
       document.getElementById('listView').style.display = 'none';
       document.getElementById('bottomNav').style.display = 'none';
       document.getElementById('mainTopbar').style.display = 'none';
-
       document.getElementById('readerTopbar').style.display = 'flex';
       document.getElementById('readerTopTitle').textContent = `Hymn ${h.displayNumber}`;
       const favBtn = document.getElementById('readerFavBtn');
       favBtn.textContent = favorites.has(h.id) ? '❤️' : '♡';
       favBtn.onclick = () => toggleFavorite(h.id);
-
       document.getElementById('readerBar').style.display = 'flex';
       document.getElementById('prevHymnBtn').style.visibility = 'visible';
       document.getElementById('nextHymnBtn').style.visibility = 'visible';
@@ -760,23 +369,17 @@
       currentHymnIndex = -1;
       const srv = allServices[idx];
       if (!srv) return;
-
       document.getElementById('listView').style.display = 'none';
       document.getElementById('bottomNav').style.display = 'none';
       document.getElementById('mainTopbar').style.display = 'none';
-
       document.getElementById('readerTopbar').style.display = 'flex';
       document.getElementById('readerTopTitle').textContent = 'Service';
       document.getElementById('readerFavBtn').style.display = 'none';
-
       document.getElementById('readerBar').style.display = 'flex';
       document.getElementById('prevHymnBtn').style.visibility = 'hidden';
       document.getElementById('nextHymnBtn').style.visibility = 'hidden';
 
-      const paras = (srv.content || '').split(/\n\n+/).map(p =>
-        `<p>${escapeText(p).replace(/\n/g, '<br>')}</p>`
-      ).join('');
-
+      const paras = (srv.content || '').split(/\n\n+/).map(p => `<p>${escapeText(p).replace(/\n/g, '<br>')}</p>`).join('');
       const readerEl = document.getElementById('readerView');
       readerEl.innerHTML = `
         <div class="reader-header">
@@ -795,7 +398,6 @@
       document.getElementById('readerBar').style.display = 'none';
       document.getElementById('readerTopbar').style.display = 'none';
       document.getElementById('readerFavBtn').style.display = 'inline-flex';
-
       document.getElementById('mainTopbar').style.display = 'flex';
       document.getElementById('listView').style.display = 'block';
       document.getElementById('bottomNav').style.display = 'flex';
@@ -805,15 +407,26 @@
     document.getElementById('backBtn').onclick = closeReader;
     document.getElementById('prevHymnBtn').onclick = () => { if (currentHymnIndex > 0) openHymn(currentHymnIndex - 1); };
     document.getElementById('nextHymnBtn').onclick = () => { if (currentHymnIndex < filteredHymns.length - 1) openHymn(currentHymnIndex + 1); };
-
     document.getElementById('fontDownBtn').onclick = () => { if (fontSize > 14) { fontSize -= 2; applyFontSize(); } };
     document.getElementById('fontUpBtn').onclick = () => { if (fontSize < 28) { fontSize += 2; applyFontSize(); } };
-
     document.getElementById('searchInput').addEventListener('input', renderList);
     document.getElementById('categorySelect').addEventListener('change', renderList);
-    document.getElementById('clearSearchBtn').onclick = () => {
-      document.getElementById('searchInput').value = '';
-      renderList();
-    };
+    document.getElementById('clearSearchBtn').onclick = () => { document.getElementById('searchInput').value = ''; renderList(); };
 
-    document.querySelectorAll('.nav-
+    document.querySelectorAll('.nav-item').forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentTab = btn.dataset.tab;
+        renderList();
+        window.scrollTo(0, 0);
+      };
+    });
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+    }
+    initData();
+  </script>
+</body>
+</html>
